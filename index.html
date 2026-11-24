@@ -214,7 +214,29 @@ tbody tr.row:focus-visible{outline-color:#6ad6ff}
 @media(prefers-reduced-motion:reduce){#activity-svg .activity-sweep.is-playing{animation:none;opacity:0}}
 @media print{.activity-viewport{max-height:none;overflow:visible}#activity-svg{min-width:0}.activity-panel{break-inside:avoid}.activity-head .section-actions{display:none}.activity-explanation{background:#fff;border:1px solid #ccc;color:#111}.activity-stats>span{background:#fff;border-color:#ccc}.activity-stats strong{color:#111}.activity-footnote{color:#333}}
 
-  </style>
+  
+/* ServoSync learning and sharing enhancements */
+.nav-feedback{display:inline-flex;align-items:center;justify-content:center;padding:9px 13px;border:1px solid rgba(118,217,255,.5);border-radius:999px;background:rgba(14,56,90,.7);color:#d2f3ff;font-size:12px;font-weight:800;text-decoration:none;white-space:nowrap;transition:.2s ease}
+.nav-feedback:hover,.nav-feedback:focus-visible{background:rgba(25,111,158,.45);border-color:#76d9ff;color:#fff;transform:translateY(-1px)}
+.field{position:relative}.field:has(>.info-tip) > label{padding-right:26px}
+.info-tip{position:absolute;top:0;right:0;z-index:6;width:22px;height:22px;border:1px solid rgba(118,217,255,.38);border-radius:50%;background:#163651;color:#9cddff;font:700 12px/1 system-ui;cursor:help;display:grid;place-items:center;padding:0}
+.info-tip:hover,.info-tip:focus-visible,.info-tip.is-open{background:#216083;color:white;border-color:#76d9ff}
+.info-tip::after{content:attr(data-tip);pointer-events:none;position:absolute;z-index:9;top:calc(100% + 10px);right:0;display:block;width:235px;max-width:min(76vw,235px);padding:11px 12px;border:1px solid #4484ad;border-radius:10px;background:#0a233d;color:#e4f6ff;font:500 12px/1.6 system-ui;text-align:left;box-shadow:0 14px 36px #0008;opacity:0;visibility:hidden;transform:translateY(-5px);transition:.15s ease;white-space:normal}
+.info-tip:hover::after,.info-tip:focus-visible::after,.info-tip.is-open::after{opacity:1;visibility:visible;transform:translateY(0)}
+.tool-row{display:grid;grid-template-columns:1fr;gap:8px;margin:11px 0 0}
+.preset-btn{width:100%;text-align:left;display:flex;align-items:center;gap:9px;justify-content:center;background:#102f50;border:1px solid #39729e;color:#cceeff;border-radius:11px;padding:11px 12px;font-size:12px;font-weight:800;cursor:pointer}
+.preset-btn:hover{background:#174467;border-color:#64c6ed}
+.preset-caption{color:#90afcc;font-size:11px;line-height:1.5}
+.export-pdf-btn{background:linear-gradient(120deg,#207bb2,#14557b)!important;border-color:#6ac0f2!important;color:#fff!important}
+.export-pdf-btn:hover{background:#2386be!important}
+.verify-panel{margin-top:16px;border:1px solid #2b5d7f;background:linear-gradient(130deg,#0c2742,#0b1c33);border-radius:13px;padding:13px}
+.verify-head{display:flex;gap:10px;align-items:center;justify-content:space-between}.verify-head strong{font-size:12px;color:#c4eaff}.verify-head button{border:1px solid #3f85ac;border-radius:8px;padding:7px 9px;background:#174266;color:#e2f5ff;font-weight:800;font-size:11px;cursor:pointer}
+.verify-head button:hover{background:#225980}.verify-results{font:11px/1.65 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color:#b3d9ee;margin-top:9px;white-space:pre-wrap;overflow-wrap:anywhere}
+.verify-results.is-pass{color:#9df0d0}.verify-results.is-fail{color:#ffb6b6}
+@media(max-width:610px){.nav-actions{flex-wrap:wrap;justify-content:flex-end;gap:6px}.nav-feedback{font-size:11px;padding:7px 9px}.info-tip::after{width:210px}}
+@media print{.nav-feedback,.info-tip,.tool-row,.verify-panel,#export-pdf{display:none!important}}
+
+</style>
 </head>
 <body>
 <div id="scroll-progress" aria-hidden="true"></div>
@@ -222,7 +244,7 @@ tbody tr.row:focus-visible{outline-color:#6ad6ff}
 <main class="wrap">
   <nav class="site-nav" aria-label="Site navigation">
     <div class="brand"><span class="brand-mark" aria-hidden="true"></span><span>MEIE 3292 <span class="brand-sub">/ WORK STUDY</span></span></div>
-    <div class="nav-actions"><span class="mode-indicator"><i></i> Live calculations</span><button id="trail-toggle" class="trail-toggle" type="button" aria-pressed="true" title="Turn the blue pixel cursor trail on or off"><span class="toggle-led"></span><span id="trail-toggle-text">Pixel trail: ON</span></button></div>
+    <div class="nav-actions"><span class="mode-indicator"><i></i> Live calculations</span><button id="trail-toggle" class="trail-toggle" type="button" aria-pressed="true" title="Turn the blue pixel cursor trail on or off"><span class="toggle-led"></span><span id="trail-toggle-text">Pixel trail: ON</span></button><a class="nav-feedback" href="https://forms.gle/txfjX41zt33e9gM87" target="_blank" rel="noopener noreferrer" aria-label="Give student feedback on ServoSync (opens in a new tab)">Give feedback ↗</a></div>
   </nav>
   <header class="intro">
     <div class="eyebrow"><span class="dot"></span> AN INTERACTIVE INDUSTRIAL ENGINEERING TOOL</div>
@@ -247,13 +269,13 @@ tbody tr.row:focus-visible{outline-color:#6ad6ff}
         <div class="form-section-title">Random servicing inputs</div>
         <div class="form-fields">
           <div class="field">
-            <label for="probability">Attention probability (p)</label>
+            <label for="probability">Attention probability (p)</label><button class="info-tip" type="button" aria-label="Explain probability" data-tip="p: probability a machine needs operator attention at a randomly sampled time. Enter a percentage (e.g., 40). The site computes q = 1 - p." title="p: probability a machine needs operator attention at a randomly sampled time. Enter a percentage (e.g., 40). The site computes q = 1 - p.">?</button>
             <div class="input-box"><input type="number" id="probability" value="40" min="0" max="100" step="any" inputmode="decimal"><span class="unit">%</span></div>
             <div class="help">Time a machine needs operator attention.</div>
           </div>
           <div class="qbar"><span>Unattended (q = 1 − p)</span><b id="probability-q">60%</b></div>
           <div class="field">
-            <label for="random-rate">Production rate per productive machine-hour</label>
+            <label for="random-rate">Production rate per productive machine-hour</label><button class="info-tip" type="button" aria-label="Explain random rate" data-tip="Optional x: units produced per productive machine-hour. If blank, results are shown as a cost coefficient divided by x." title="Optional x: units produced per productive machine-hour. If blank, results are shown as a cost coefficient divided by x.">?</button>
             <div class="input-box"><input type="number" id="random-rate" placeholder="Optional (x)" min="0.000001" step="any" inputmode="decimal"><span class="unit">units/h</span></div>
             <div class="help">Leave blank to show the professor's result as cost ÷ x.</div>
           </div>
@@ -263,22 +285,22 @@ tbody tr.row:focus-visible{outline-color:#6ad6ff}
         <div class="form-section-title">Synchronous servicing inputs</div>
         <div class="form-fields">
           <div class="field">
-            <label for="service-time">Operator service time (l)</label>
+            <label for="service-time">Operator service time (l)</label><button class="info-tip" type="button" aria-label="Explain service time" data-tip="l: minutes of operator hands-on service per machine visit, including loading or unloading. Must be greater than zero." title="l: minutes of operator hands-on service per machine visit, including loading or unloading. Must be greater than zero.">?</button>
             <div class="input-box"><input type="number" id="service-time" value="1" min="0.000001" step="any" inputmode="decimal"><span class="unit">min</span></div>
             <div class="help">Loading, unloading, starting the machine.</div>
           </div>
           <div class="field">
-            <label for="machine-time">Automatic machine time (m)</label>
+            <label for="machine-time">Automatic machine time (m)</label><button class="info-tip" type="button" aria-label="Explain machine time" data-tip="m: minutes the machine operates automatically after service, with no operator attention." title="m: minutes the machine operates automatically after service, with no operator attention.">?</button>
             <div class="input-box"><input type="number" id="machine-time" value="3" min="0" step="any" inputmode="decimal"><span class="unit">min</span></div>
             <div class="help">Time the machine runs without operator attention.</div>
           </div>
           <div class="field">
-            <label for="walk-time">Walking / other time (w)</label>
+            <label for="walk-time">Walking / other time (w)</label><button class="info-tip" type="button" aria-label="Explain walk time" data-tip="w: minutes per machine visit spent walking or doing other work; added to the operator round." title="w: minutes per machine visit spent walking or doing other work; added to the operator round.">?</button>
             <div class="input-box"><input type="number" id="walk-time" value="0.1" min="0" step="any" inputmode="decimal"><span class="unit">min</span></div>
             <div class="help">Additional operator time per machine visit.</div>
           </div>
           <div class="field">
-            <label for="units-per-cycle">Units per machine cycle</label>
+            <label for="units-per-cycle">Units per machine cycle</label><button class="info-tip" type="button" aria-label="Explain units per cycle" data-tip="Finished units produced by one machine per completed cycle (e.g., 1 unit)." title="Finished units produced by one machine per completed cycle (e.g., 1 unit).">?</button>
             <div class="input-box"><input type="number" id="units-per-cycle" value="1" min="0.000001" step="any" inputmode="decimal"><span class="unit">units</span></div>
             <div class="help">Usually one finished unit per completed cycle.</div>
           </div>
@@ -287,13 +309,15 @@ tbody tr.row:focus-visible{outline-color:#6ad6ff}
       <hr class="rule">
       <div class="form-section-title">Costs & comparison</div>
       <div class="shared-fields">
-        <div class="field"><label for="operator-cost">Operator cost (K₁)</label><div class="input-box"><input type="number" id="operator-cost" value="12" min="0" step="any" inputmode="decimal"><span class="unit">/ hour</span></div></div>
-        <div class="field"><label for="machine-cost">Machine cost (K₂)</label><div class="input-box"><input type="number" id="machine-cost" value="20" min="0" step="any" inputmode="decimal"><span class="unit">/ hour</span></div></div>
-        <div class="field"><label for="hours">Work shift length</label><div class="input-box"><input type="number" id="hours" value="8" min="0.000001" step="any" inputmode="decimal"><span class="unit">hours</span></div></div>
-        <div class="field"><label for="max-machines">Compare up to</label><div class="input-box"><input type="number" id="max-machines" value="4" min="1" max="40" step="1" inputmode="numeric"><span class="unit">machines</span></div></div>
-        <div class="field"><label for="currency">Currency</label><div class="input-box"><select id="currency"><option value="$">USD ($)</option><option value="OMR">OMR</option><option value="SAR">SAR</option><option value="€">EUR (€)</option><option value="£">GBP (£)</option></select></div></div>
+        <div class="field"><label for="operator-cost">Operator cost (K₁)</label><button class="info-tip" type="button" aria-label="Explain operator cost" data-tip="K1: hourly cost of one operator, in the selected currency. Enter 0 if labor is excluded." title="K1: hourly cost of one operator, in the selected currency. Enter 0 if labor is excluded.">?</button><div class="input-box"><input type="number" id="operator-cost" value="12" min="0" step="any" inputmode="decimal"><span class="unit">/ hour</span></div></div>
+        <div class="field"><label for="machine-cost">Machine cost (K₂)</label><button class="info-tip" type="button" aria-label="Explain machine cost" data-tip="K2: hourly cost of each machine, in the selected currency. Total machine cost for n machines is n x K2." title="K2: hourly cost of each machine, in the selected currency. Total machine cost for n machines is n x K2.">?</button><div class="input-box"><input type="number" id="machine-cost" value="20" min="0" step="any" inputmode="decimal"><span class="unit">/ hour</span></div></div>
+        <div class="field"><label for="hours">Work shift length</label><button class="info-tip" type="button" aria-label="Explain hours" data-tip="H: total hours in one work shift; used to calculate shift output, shift costs, and random lost hours." title="H: total hours in one work shift; used to calculate shift output, shift costs, and random lost hours.">?</button><div class="input-box"><input type="number" id="hours" value="8" min="0.000001" step="any" inputmode="decimal"><span class="unit">hours</span></div></div>
+        <div class="field"><label for="max-machines">Compare up to</label><button class="info-tip" type="button" aria-label="Explain max machines" data-tip="Upper bound of machine assignments to compare, from 1 to 40. The optimum is within this tested range." title="Upper bound of machine assignments to compare, from 1 to 40. The optimum is within this tested range.">?</button><div class="input-box"><input type="number" id="max-machines" value="4" min="1" max="40" step="1" inputmode="numeric"><span class="unit">machines</span></div></div>
+        <div class="field"><label for="currency">Currency</label><button class="info-tip" type="button" aria-label="Explain currency" data-tip="Changes the monetary label only; it does not convert currencies. Enter all costs in the same currency." title="Changes the monetary label only; it does not convert currencies. Enter all costs in the same currency.">?</button><div class="input-box"><select id="currency"><option value="$">USD ($)</option><option value="OMR">OMR</option><option value="SAR">SAR</option><option value="€">EUR (€)</option><option value="£">GBP (£)</option></select></div></div>
       </div>
       <div class="btn-row"><button id="calculate" class="btn primary" type="button">Calculate results</button><button id="reset" class="btn secondary" type="button">Reset</button></div>
+      <div class="tool-row"><button id="tutorial-preset" type="button" class="preset-btn">✦ Load Tutorial 07 Example</button><div id="preset-caption" class="preset-caption">Uses your professor's Random Servicing data: p = 40%, K₁ = $12/h, K₂ = $20/h, 8 h, 4 machines.</div></div>
+      <div class="verify-panel" aria-label="Calculation verification"><div class="verify-head"><strong>Algorithm verification</strong><button id="run-verification" type="button">Run self-checks</button></div><div id="verify-results" class="verify-results" aria-live="polite">Independent numerical checks for both servicing methods.</div></div>
       <div class="note-text">Results update automatically as you edit. Click a table row to see its calculations. Scroll inside this panel to access more inputs.</div>
     </div></aside>
 
@@ -308,7 +332,7 @@ tbody tr.row:focus-visible{outline-color:#6ad6ff}
         <div class="metric"><div class="label">Total cost per shift</div><div class="value" id="stat3">—</div></div>
       </div>
       <div class="panel"><div class="panel-pad"><div class="section-head"><div><h2>Cost comparison</h2><p class="small">Compare all machine assignments. The bright blue bar marks the lowest cost.</p></div></div><div class="chart" id="chart"></div></div></div>
-      <div class="panel"><div class="panel-pad"><div class="section-head"><div><h2>Machine comparison table</h2><p class="small">Select any row to inspect the steps used to get the answer.</p></div><div class="section-actions"><button id="export" class="sm-btn" type="button">Export CSV</button><button id="print" class="sm-btn" type="button">Print</button></div></div><div class="table-scroll"><table><thead id="table-head"></thead><tbody id="table-body"></tbody></table></div></div></div>
+      <div class="panel"><div class="panel-pad"><div class="section-head"><div><h2>Machine comparison table</h2><p class="small">Select any row to inspect the steps used to get the answer.</p></div><div class="section-actions"><button id="export-pdf" class="sm-btn export-pdf-btn" type="button">Download PDF Solution</button><button id="export" class="sm-btn" type="button">Export CSV</button><button id="print" class="sm-btn" type="button">Print</button></div></div><div class="table-scroll"><table><thead id="table-head"></thead><tbody id="table-body"></tbody></table></div></div></div>
       <!-- Live multiple-activity chart: synchronized to the currently selected machine count. -->
       <section id="activity-panel" class="panel activity-panel" aria-labelledby="activity-heading" hidden>
         <div class="panel-pad">
@@ -559,6 +583,10 @@ tbody tr.row:focus-visible{outline-color:#6ad6ff}
     $('random-tab').setAttribute('aria-selected',String(next==='random'));
     $('synchronous-tab').setAttribute('aria-selected',String(next==='synchronous'));
     $('form-description').textContent=next==='random'?'Independent machine attention requests (binomial probability).':'Fixed service, machine and walking times (deterministic cycles).';
+    $('tutorial-preset').textContent=next==='random'?'✦ Load Tutorial 07 Example':'✦ Load Synchronous Demo';
+    $('preset-caption').textContent=next==='random'
+      ? "Professor's Tutorial 07: p=40%, K1=$12/h, K2=$20/h, 8-hour shift, compare n=1 to 4."
+      : 'Illustrative deterministic example (not Tutorial 07): l=1, m=3, w=0.1 min, one unit/cycle.';
     $('method-foot').innerHTML=next==='random'
       ? '<strong>Random servicing method:</strong> P(m) = C(n,m)p<sup>m</sup>q<sup>n−m</sup>. Waiting machine-hours = H × Σ P(m)max(m−1,0). TEC = total shift cost / expected shift production. This is the simplified approximation used in Tutorial 07. Assumes one operator and independent machine attention requests.'
       : '<strong>Synchronous servicing method:</strong> n′ = (l+m)/(l+w); cycle time = max(l+m, n(l+w)); production/hour = 60 × n × units/cycle ÷ cycle time; TEC = hourly labor and machine cost ÷ output/hour. Assumes identical machines, repeated deterministic cycles and one operator. Source: <a href="https://oeelab.com/machines-per-operator-calculator" target="_blank" rel="noopener noreferrer">Synchronous servicing formula reference</a>.';
@@ -580,6 +608,203 @@ tbody tr.row:focus-visible{outline-color:#6ad6ff}
     const url=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));
     const link=document.createElement('a');link.href=url;link.download=mode+'_servicing_results.csv';document.body.appendChild(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1500);
   }
+
+  // Presets: the Random case is reproduced from the supplied Tutorial 07 lecture handout.
+  // The Synchronous preset is a separate illustrative example, NOT from that handout.
+  function applyTutorialPreset(){
+    const preset=mode==='random'
+      ? {'probability':'40','random-rate':'','operator-cost':'12','machine-cost':'20','hours':'8','max-machines':'4','currency':'$'}
+      : {'service-time':'1','machine-time':'3','walk-time':'0.1','units-per-cycle':'1','operator-cost':'12','machine-cost':'20','hours':'8','max-machines':'4','currency':'$'};
+    for(const [id,val] of Object.entries(preset))$(id).value=val;
+    selectedN=3;updateQ();render();
+    $('tutorial-preset').textContent='✓ Example loaded';
+    setTimeout(()=>{$('tutorial-preset').textContent=mode==='random'?'✦ Load Tutorial 07 Example':'✦ Load Synchronous Demo';},1600);
+  }
+
+  // Simple standalone PDF writer. No CDN, login, library download, or server is required.
+  // Uses built-in PDF Helvetica fonts and only printable ASCII text for portability.
+  function createSolutionPDF(){
+    if(!current || comparison.length===0 || $('input-error').style.display==='block')return;
+    const a=current, rows=comparison.slice(), picked=rows.find(r=>r.n===selectedN)||winner;
+    const method=mode==='random'?'Random':'Synchronous';
+    const currencyCode={'$':'USD','OMR':'OMR','SAR':'SAR','€':'EUR','£':'GBP'}[a.currency]||a.currency;
+    const printable=v=>String(v).replace(/[\u2010-\u2015\u2212]/g,'-').replace(/\u00d7/g,'x').replace(/\u00f7/g,'/').replace(/\u2211/g,'sum').replace(/\u2032/g,"'").replace(/\u20ac/g,'EUR').replace(/\u00a3/g,'GBP').replace(/\u2081/g,'1').replace(/\u2082/g,'2').replace(/[^\x20-\x7e]/g,'?');
+    const number=(v,d=4)=>Number(v).toFixed(d).replace(/0+$/,'').replace(/\.$/,'');
+    const escapePDF=v=>printable(v).replace(/\\/g,'\\\\').replace(/\(/g,'\\(').replace(/\)/g,'\\)');
+    const W=595,H=842,L=48,R=547,B=792;
+    const pages=[];let page=null,y=0;
+    const addPage=()=>{
+      page={cmds:[]};pages.push(page);y=77;
+      rect(0,0,W,50,[.025,.085,.155]);
+      text('SERVOSYNC  /  '+method.toUpperCase()+' SERVICING',L,31,12,[.87,.96,1],true);
+      text('MEIE3292',R-76,31,9,[.60,.82,.95]);
+      line(L,H-41,R,H-41,[.70,.81,.87],.7);
+    };
+    const rgb=c=>c.map(v=>Number(v).toFixed(3)).join(' ');
+    function rect(x,top,w,h,c){page.cmds.push(`${rgb(c)} rg ${x} ${H-top-h} ${w} ${h} re f`);}
+    function line(x1,top1,x2,top2,color=[.7,.8,.9],width=.5){page.cmds.push(`${rgb(color)} RG ${width} w ${x1} ${H-top1} m ${x2} ${H-top2} l S`);}
+    function text(t,x,top,size=10,color=[.09,.16,.24],bold=false){
+      page.cmds.push(`BT /${bold?'F2':'F1'} ${size} Tf ${rgb(color)} rg 1 0 0 1 ${x} ${H-top} Tm (${escapePDF(t)}) Tj ET`);
+    }
+    function ensure(h=17){if(y+h>B)addPage();}
+    function wrap(txt, maxChars=92){
+      const words=printable(txt).split(/\s+/);const lines=[];let buf='';
+      for(const word of words){const trial=buf?buf+' '+word:word;if(trial.length>maxChars&&buf){lines.push(buf);buf=word;}else buf=trial;}
+      if(buf)lines.push(buf);return lines.length?lines:[''];
+    }
+    function paragraph(txt,maxChars=98){for(const p of wrap(txt,maxChars)){ensure(17);text(p,L,y,9.3);y+=14.5;}y+=6;}
+    function section(txt){ensure(39);rect(L,y-14,R-L,24,[.87,.94,.985]);text(txt.toUpperCase(),L+9,y+2,10,[.06,.24,.41],true);y+=32;}
+    function bullet(txt){paragraph('- '+txt,101);}
+    function table(headers, entries, widths){
+      const total=widths.reduce((x,z)=>x+z,0);if(total>R-L+1)throw new Error('PDF table too wide');
+      const rowH=22,sz=8;
+      const drawRow=(values,style='normal')=>{
+        ensure(rowH+2);
+        if(style==='header')rect(L,y-14,total,rowH,[.09,.26,.42]);
+        else if(style==='best')rect(L,y-14,total,rowH,[.82,.94,.96]);
+        else if(Math.round(y/rowH)%2===0)rect(L,y-14,total,rowH,[.95,.97,.99]);
+        let x=L+7;
+        for(let i=0;i<values.length;i++){
+          const maxChars=Math.max(3,Math.floor((widths[i]-13)/(sz*.56)));
+          let t=printable(values[i]);if(t.length>maxChars)t=t.slice(0,maxChars-2)+'..';
+          text(t,x,y,sz,style==='header'?[.93,.98,1]:[.10,.2,.29],style!=='normal');x+=widths[i];
+        }
+        y+=rowH;
+      };
+      drawRow(headers,'header');
+      for(const e of entries)drawRow(e.values,e.best?'best':'normal');
+      y+=8;
+    }
+    addPage();
+    text('Algorithm and calculation report',L,y,18,[.08,.21,.33],true);y+=27;
+    paragraph('This file was generated by ServoSync from the current user inputs. It includes candidate comparison, the selected machine assignment, and the calculation steps.');
+    section('Inputs');
+    const shared=[`Operator hourly cost K1: ${currencyCode} ${number(a.K1)} / h`,`Machine hourly cost K2: ${currencyCode} ${number(a.K2)} / h`,`Shift length H: ${number(a.hours)} h`,`Comparison range: n = 1 to ${a.max}`];
+    const specific=mode==='random'
+      ? [`Attention probability p: ${number(a.p*100)}%`,`Unattended probability q: ${number(a.q*100)}%`,`Production rate x: ${a.rate===null?'not specified (symbolic x)':number(a.rate)+' units/h'}`]
+      : [`Operator service l: ${number(a.l)} min`,`Automatic machine time m: ${number(a.m)} min`,`Walk/other time w: ${number(a.w)} min`,`Units per cycle: ${number(a.units)}`];
+    for(const x of [...specific,...shared])bullet(x);
+    section('Best assignment');
+    paragraph(`Lowest unit cost within the tested range: ${winner.n} machines per operator.`);
+    paragraph(`Selected unit cost: ${mode==='random'&&a.rate===null?currencyCode+' '+number(winner.costCoeff,5)+' / x':currencyCode+' '+number(winner.unitCost,5)+' per unit'}.`);
+    paragraph(`Shift cost: ${currencyCode} ${number(winner.shiftCost,3)}. `+(mode==='random'?`Expected lost machine-hours: ${number(winner.lost)}. Productive machine-hours: ${number(winner.productive)}.`:`Cycle time: ${number(winner.cycle)} min. Shift output: ${number(winner.output)} units.`));
+    section('Comparison for all machine counts');
+    if(mode==='random'){
+      table(['n','Lost h','Productive h','Shift cost','Unit cost'],rows.map(r=>({best:r.n===winner.n,values:[r.n,number(r.lost,4),number(r.productive,4),currencyCode+' '+number(r.shiftCost,2),currencyCode+' '+number(a.rate===null?r.costCoeff:r.unitCost,3)+(a.rate===null?'/x':'')]})),[42,93,112,115,137]);
+    } else {
+      table(['n','Cycle min','Output/shift','Shift cost','Unit cost'],rows.map(r=>({best:r.n===winner.n,values:[r.n,number(r.cycle,3),number(r.output,2),currencyCode+' '+number(r.shiftCost,2),currencyCode+' '+number(r.unitCost,3)]})),[42,93,112,115,137]);
+    }
+    section(`Worked steps for n = ${picked.n} machines`);
+    if(mode==='random'){
+      bullet('P(m) = C(n,m) x p^m x q^(n-m).');
+      bullet('Waiting machines for m attention requests = max(0, m - 1).');
+      bullet('Expected lost machine-hours = H x sum[P(m) x waiting machines].');
+      table(['m','P(m)','Waiting','Lost hours'],picked.cases.map(c=>({values:[c.m,number(c.probability,6),c.waiting,number(c.lostHours,5)]})),[80,145,115,159]);
+      bullet(`Expected lost hours = ${number(picked.lost,6)} h.`);
+      bullet(`Productive hours = n x H - lost = ${picked.n} x ${number(a.hours)} - ${number(picked.lost)} = ${number(picked.productive)} machine-h.`);
+      if(a.rate===null)bullet(`Production = ${number(picked.productive)} times x units; x is the unknown hourly output rate.`);
+      else bullet(`Production = ${number(picked.productive)} x ${number(a.rate)} = ${number(picked.output)} units.`);
+      bullet(`Shift cost = H x (K1 + n x K2) = ${number(a.hours)} x (${number(a.K1)} + ${picked.n} x ${number(a.K2)}) = ${currencyCode} ${number(picked.shiftCost)}.`);
+      bullet(`Unit cost = shift cost / production = ${currencyCode} ${number(a.rate===null?picked.costCoeff:picked.unitCost,5)} ${a.rate===null?'/ x':'per unit'}.`);
+      section('Method assumptions');
+      paragraph('Simplified Tutorial 07 binomial approximation: attention requests are independent and have equal p; a single operator attends to at most one machine at a time. Overlapping demands produce expected waiting machine-hours. This is a teaching approximation, not a queue simulation.');
+    } else {
+      bullet(`Ideal n-prime = (l + m) / (l + w) = (${number(a.l)} + ${number(a.m)}) / (${number(a.l)} + ${number(a.w)}) = ${number(picked.ideal,5)}.`);
+      bullet(`Machine cycle = l + m = ${number(picked.machineCycle,4)} min.`);
+      bullet(`Operator round = n x (l + w) = ${picked.n} x (${number(a.l)} + ${number(a.w)}) = ${number(picked.operatorRound,4)} min.`);
+      bullet(`Actual cycle = max(machine cycle, operator round) = ${number(picked.cycle,4)} min.`);
+      bullet(`Operator idle per round = max(0, machine cycle - operator round) = ${number(picked.operatorIdle,4)} min.`);
+      bullet(`Machine wait per machine/cycle = max(0, operator round - machine cycle) = ${number(picked.machineWait,4)} min.`);
+      bullet(`Operator utilization = ${number(picked.operatorUtil*100,3)}%; machine-cycle utilization = ${number(picked.machineUtil*100,3)}%.`);
+      bullet(`Output per hour = 60 x n x units/cycle / cycle = ${number(picked.ratePerHour,4)} units/h.`);
+      bullet(`Output per shift = ${number(picked.ratePerHour,4)} x ${number(a.hours)} = ${number(picked.output,4)} units.`);
+      bullet(`Shift cost = H x (K1 + n x K2) = ${currencyCode} ${number(picked.shiftCost)}.`);
+      bullet(`Unit cost = shift cost / output = ${currencyCode} ${number(picked.unitCost,5)} per unit.`);
+      section('Method assumptions');
+      paragraph('Identical machines and deterministic service and automatic times; one operator serves each machine in a repeating order. This idealized steady-state model does not include stochastic failures, travel variation, or setup differences.');
+    }
+    for(let i=0;i<pages.length;i++){
+      const p=pages[i];p.cmds.push(`BT /F1 9 Tf 0.40 0.53 0.63 rg 1 0 0 1 ${L} 27 Tm (ServoSync | www: 484x.github.io/ServoSync/) Tj ET`);
+      p.cmds.push(`BT /F1 9 Tf 0.40 0.53 0.63 rg 1 0 0 1 ${R-61} 27 Tm (Page ${i+1}/${pages.length}) Tj ET`);
+    }
+    const objects=[],pageIds=pages.map((_,i)=>3+2*i),fontId=3+2*pages.length;
+    objects[1]='<< /Type /Catalog /Pages 2 0 R >>';
+    objects[2]=`<< /Type /Pages /Kids [${pageIds.map(id=>id+' 0 R').join(' ')}] /Count ${pages.length} >>`;
+    for(let i=0;i<pages.length;i++){
+      const pageId=pageIds[i],contentId=pageId+1,stream=pages[i].cmds.join('\n')+'\n';
+      objects[pageId]=`<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ${W} ${H}] /Resources << /Font << /F1 ${fontId} 0 R /F2 ${fontId+1} 0 R >> >> /Contents ${contentId} 0 R >>`;
+      objects[contentId]=`<< /Length ${stream.length} >>\nstream\n${stream}endstream`;
+    }
+    objects[fontId]='<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>';
+    objects[fontId+1]='<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>';
+    let body='%PDF-1.4\n%ServoSync\n';const offsets=[0];
+    for(let i=1;i<objects.length;i++){
+      offsets[i]=body.length;body+=`${i} 0 obj\n${objects[i]}\nendobj\n`;
+    }
+    const xrefOffset=body.length;
+    body+=`xref\n0 ${objects.length}\n0000000000 65535 f \n`;
+    for(let i=1;i<objects.length;i++)body+=String(offsets[i]).padStart(10,'0')+' 00000 n \n';
+    body+=`trailer\n<< /Size ${objects.length} /Root 1 0 R >>\nstartxref\n${xrefOffset}\n%%EOF`;
+    const pdf=new Blob([body],{type:'application/pdf'});
+    const url=URL.createObjectURL(pdf),link=document.createElement('a');
+    link.href=url;link.download=`ServoSync_${method}_Solution_${picked.n}_machines.pdf`;
+    document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),5000);
+  }
+
+  function runVerification(){
+    const result=[];
+    function check(name,condition){result.push({name,pass:Boolean(condition)});}
+    function near(x,y,tol=1e-8){return Number.isFinite(x)&&Math.abs(x-y)<=tol*Math.max(1,Math.abs(y));}
+    const base={K1:12,K2:20,hours:8,max:4,currency:'$',p:.4,q:.6,rate:null};
+    const random=[1,2,3,4].map(n=>calcRandom(n,base));
+    check('Tutorial 07: n=2 expected lost 1.28 h',near(random[1].lost,1.28));
+    check('Tutorial 07: n=3 expected lost 3.328 h',near(random[2].lost,3.328));
+    check('Tutorial 07: n=4 expected lost 5.8368 h',near(random[3].lost,5.8368));
+    check('Tutorial 07: optimal assignment = 3',random[2].costCoeff<random[1].costCoeff&&random[2].costCoeff<random[3].costCoeff&&random[2].costCoeff<random[0].costCoeff);
+    check('Tutorial 07: n=1 unit-cost coefficient = 32',near(random[0].costCoeff,32));
+    // Independent identity E[max(M-1,0)] = np - P(M>=1).
+    for(const p of [0,.1,.4,.8,1]){
+      for(const n of [1,2,4,15,40]){
+        const a={...base,p,q:1-p};const r=calcRandom(n,a);
+        const expected=base.hours*(n*p-(1-(1-p)**n));
+        check(`Random identity: n=${n}, p=${p}`,near(r.lost,expected,1e-7));
+        check(`Random probability sum: n=${n}, p=${p}`,near(r.cases.reduce((t,c)=>t+c.probability,0),1,1e-7));
+        check(`Random production bounds: n=${n}, p=${p}`,r.productive>=-1e-8&&r.productive<=n*base.hours+1e-8);
+      }
+    }
+    const sbase={K1:12,K2:20,hours:8,max:4,currency:'$',l:1,m:3,w:.1,units:1};
+    const sync=[1,2,3,4].map(n=>calcSynchronous(n,sbase));
+    check('Synchronous: n=3 expected cycle 4 min',near(sync[2].cycle,4));
+    check('Synchronous: n=3 output 360 units/shift',near(sync[2].output,360));
+    check('Synchronous: n=3 unit cost = 1.60',near(sync[2].unitCost,1.6));
+    check('Synchronous: n=4 machine wait 0.4 min',near(sync[3].machineWait,.4));
+    check('Synchronous: n=1 operator idle 2.9 min',near(sync[0].operatorIdle,2.9));
+    for(const [l,m,w,units] of [[.5,5,0,1],[2,0,1,2],[1,1,0,1],[.1,0,.01,10]]){
+      for(const n of [1,2,4,20,40]){
+        const a={...sbase,l,m,w,units},r=calcSynchronous(n,a);
+        check(`Sync cycle >= both: n=${n}, l=${l}, m=${m}`,r.cycle>=r.machineCycle-1e-12&&r.cycle>=r.operatorRound-1e-12);
+        check(`Sync waiting complement: n=${n}, l=${l}, m=${m}`,near(r.machineWait*r.operatorIdle,0));
+        check(`Sync production identity: n=${n}, l=${l}, m=${m}`,near(r.ratePerHour*r.cycle,60*n*units));
+        check(`Sync cost identity: n=${n}, l=${l}, m=${m}`,near(r.unitCost*r.output,r.shiftCost));
+      }
+    }
+    const failures=result.filter(x=>!x.pass),box=$('verify-results');
+    box.className='verify-results '+(failures.length?'is-fail':'is-pass');
+    box.textContent=`${result.length-failures.length}/${result.length} checks passed. `+(failures.length?`Failed: ${failures.slice(0,5).map(x=>x.name).join('; ')}`:'Random, synchronous, tutorial, and edge-case tests passed.');
+    return{passed:result.length-failures.length,total:result.length,failures};
+  }
+  // Make self-test available to automated regression checks, without changing user inputs.
+  window.ServoSyncVerify=runVerification;
+  document.querySelectorAll('.info-tip').forEach(btn=>btn.addEventListener('click',ev=>{
+    ev.stopPropagation();const show=!btn.classList.contains('is-open');
+    document.querySelectorAll('.info-tip.is-open').forEach(x=>x.classList.remove('is-open'));
+    btn.classList.toggle('is-open',show);
+  }));
+  document.addEventListener('click',()=>document.querySelectorAll('.info-tip.is-open').forEach(x=>x.classList.remove('is-open')));
+  $('tutorial-preset').addEventListener('click',applyTutorialPreset);
+  $('export-pdf').addEventListener('click',()=>{try{createSolutionPDF();}catch(e){showError('PDF export failed: '+e.message);}});
+  $('run-verification').addEventListener('click',runVerification);
+
   for(const tab of document.querySelectorAll('.tab')) tab.addEventListener('click',()=>switchMode(tab.dataset.mode));
   for(const id of editable) $(id).addEventListener('input',()=>{if(id==='probability')updateQ();render();});
   $('calculate').addEventListener('click',render);
